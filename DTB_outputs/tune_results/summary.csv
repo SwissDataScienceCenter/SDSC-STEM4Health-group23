@@ -1,0 +1,5 @@
+target,current,best_tuned,nested_honest,inputs,ridge,boosting,w_ridge
+vcd,7.13,6.99,7.2,A3,A3_p2_w0.25,A3_d4_lr0.03_it400,0.5
+tcd,7.05,6.84,7.0,A3,A3_p2_w0.5,A3_d4_lr0.03_it400,0.4
+substrate,9.4,9.14,9.54,A4,A4_p1_w0.25,A4_d4_lr0.03_it400,0.9
+byproduct,10.42,10.17,10.48,A3,A3_p2_w0.25,A3_d4_lr0.03_it400,0.6

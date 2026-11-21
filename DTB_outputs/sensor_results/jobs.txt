@@ -1,0 +1,16 @@
+ridge A4
+ridge A4past
+ridge A4fut
+ridge A4both
+hgb A4
+hgb A4past
+hgb A4fut
+hgb A4both
+hgbphase A4
+hgbphase A4past
+hgbphase A4fut
+hgbphase A4both
+knn 3
+knn 5
+knn 8
+knn 12
