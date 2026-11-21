@@ -1,0 +1,27 @@
+ridge A2 0 1.0
+ridge A2 1 0.25
+ridge A2 1 0.5
+ridge A2 1 1.0
+ridge A2 2 0.25
+ridge A2 2 0.5
+hgb A2 3 0.05 300
+hgb A2 2 0.05 400
+hgb A2 4 0.03 400
+ridge A3 0 1.0
+ridge A3 1 0.25
+ridge A3 1 0.5
+ridge A3 1 1.0
+ridge A3 2 0.25
+ridge A3 2 0.5
+hgb A3 3 0.05 300
+hgb A3 2 0.05 400
+hgb A3 4 0.03 400
+ridge A4 0 1.0
+ridge A4 1 0.25
+ridge A4 1 0.5
+ridge A4 1 1.0
+ridge A4 2 0.25
+ridge A4 2 0.5
+hgb A4 3 0.05 300
+hgb A4 2 0.05 400
+hgb A4 4 0.03 400

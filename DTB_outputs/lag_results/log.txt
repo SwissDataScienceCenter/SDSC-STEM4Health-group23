@@ -1,0 +1,6 @@
+done ridge__A4lagall
+done ridge__A4lag2
+done ridge__subS_lag2
+done hgbphase__A4lag2
+done hgbphase__subS_lag2
+done hgbphase__A4lagall

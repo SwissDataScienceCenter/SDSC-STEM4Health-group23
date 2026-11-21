@@ -1,0 +1,1 @@
+{"vcd": [["v3", 0.3], ["knn8", 0.4], ["t_hgbphase_byp_Cfut", 0.3]], "tcd": [["v3", 0.3], ["knn8", 0.3], ["t_hgbphase_byp_Cfut", 0.4]], "substrate": [["v3", 0.3], ["ridge_fut", 0.2], ["t_ridge_sub_futS", 0.5]], "byproduct": [["v3", 0.3], ["knn5", 0.5], ["t_ridge_sub_futS", 0.2]]}
