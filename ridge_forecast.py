@@ -1,8 +1,10 @@
 """Train the feed-free Ridge model and fill the bioreactor test template."""
 
 import argparse
+from datetime import datetime, timezone
 from pathlib import Path
 
+import joblib
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
@@ -88,6 +90,10 @@ def main():
     parser.add_argument("data", type=Path)
     parser.add_argument("template", type=Path)
     parser.add_argument("--output", type=Path, default=Path("bioreaction_submission_model_comparison.csv"))
+    parser.add_argument(
+        "--checkpoint", type=Path,
+        help="Checkpoint path. Defaults to results/ridge_baseline/checkpoint_<UTC timestamp>.joblib.",
+    )
     args = parser.parse_args()
 
     data = pd.read_csv(args.data)
@@ -126,6 +132,19 @@ def main():
         raise ValueError("Submission contains missing or non-finite predictions.")
     submission.to_csv(args.output, index=False)
     print(f"Trained on {len(references)} batches. Saved {len(submission)} predictions to {args.output}")
+    checkpoint = args.checkpoint
+    if checkpoint is None:
+        timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        results = Path(__file__).resolve().parents[2] / "results" / "ridge_baseline"
+        checkpoint = results / f"checkpoint_{timestamp}.joblib"
+    checkpoint.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump({
+        "step_models": step_models,
+        "references": references,
+        "ridge_weights": RIDGE_WEIGHTS,
+        "targets": TARGETS,
+    }, checkpoint)
+    print(f"Saved fitted model to {checkpoint}")
 
 
 if __name__ == "__main__":
