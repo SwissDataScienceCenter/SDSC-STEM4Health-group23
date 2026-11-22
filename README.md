@@ -59,6 +59,7 @@ These observations effectively turn the feeding schedule into an indirect substr
 
 ![substrate_controller](readme_pics/substrate_controller.png)
 
+We don't observe substrate concentrations in test batches, but the controller's feeding decisions tell us whether they crossed certain thresholds.
 
 ### 3.2. Operating signals can reveal batch-specific behavior
 
