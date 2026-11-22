@@ -1,140 +1,115 @@
-# SDSC-STEM4Health
+# Decode the Bioreactor
 
-## Getting started in the SDSC STEM4Health Hackathon
+Predicting cell growth, substrate concentration, and byproduct formation from initial conditions and bioreactor operating data.
 
-Welcome to the SDSC STEM4Health Hackathon! This git repository is your team's shared codebase: use it to keep your code in sync and under version control.
+## 1. The Challenge
 
-It contains an `environment.yml` file listing the packages your session starts with, including pandas, numpy, scikit-learn, plotly, transformers and LangChain. Apart from that, the repository is yours: organise it however suits your team.
+Given initial measurements and a known bioreactor operating trajectory, predict four quantities over time:
 
-&nbsp;
+- **VCD** — Viable Cell Density
+- **TCD** — Total Cell Density
+- **Substrate** — Nutrient concentration
+- **Byproduct** — Metabolic byproduct concentration
 
-## 1. Start working
+Our dataset contains 49 labeled training batches and 12 hidden test batches. Model performance is evaluated using Mean Absolute Percentage Error (MAPE).
 
-### 1.1 Launch a session
-On your project page, in the **Launchers** section, click the green **Launch** button. Choose **JupyterLab** or **VSCodium**, whichever you prefer.
+## 2. Exploratory Data Analysis
 
-&nbsp;
+### 2.1. What does a typical bioreactor run look like?
 
-### 1.2 Access the input data
-Your session has an `input-data` folder with one subfolder per challenge. Use the data for the challenge your team is working on.
+**[Figure 1: Example batch trajectories]**
 
-> **Note:** Don't commit the input data to the repository. Read it straight from `input-data`.
+Plot the four target quantities over time, together with the feeding schedules and reactor volume.
 
-&nbsp;
+Observe how cell densities, substrate, and byproduct evolve throughout a run.
 
-### 1.3 Connect to GitHub
-To push your work, connect your Renku account to your GitHub account (see the [Renku documentation](https://docs.renkulab.io/)). You already have access to the repository we created for your team. It is cloned into your session automatically.
+### 2.2. How much do batches differ?
 
-&nbsp;
+**[Figure 2: Target trajectories across all training batches]**
 
-### 1.4 Organise your repository
-You choose the structure. For example:
+Overlay trajectories from different batches to identify common patterns and batch-to-batch variability.
 
-```bash
-.
-├── environment.yml
-├── notebooks/
-├── src/
-├── outputs/
-└── README.md
-```
+Consider highlighting unusual late-stage behavior.
 
-Agree on the layout with your team early on. That way everyone knows where to put their files.
+### 2.3. Does increasing volume explain declining cell density?
 
-&nbsp;
+**[Figure 3: Cell density versus estimated total cell amount]**
 
-### 1.5 Work with your team using git
-Everyone works in their own session and shares work through the repository:
+Compare VCD and TCD with their volume-adjusted equivalents (VCD × volume and TCD × volume).
 
-```bash
-git pull                        # get your teammates' latest changes
-git add <files>
-git commit -m "Short description of your change"
-git push                        # share your changes
-```
+Investigate whether late-stage decreases in cell density reflect dilution, changes in total cell count, or both.
 
-Tips:
-- Pull before you start working, and push often.
-- To avoid conflicts, try not to edit the same notebook as a teammate at the same time.
-- Keep large files (data, model weights) out of git in the team-workspace folder.
+### 2.4. Where are the difficult prediction regions?
 
-> **Important:** Anything you don't commit and push is lost when the session shuts down.
+**[Figure 4: Prediction error by time step and target]**
 
-&nbsp;
+Show cross-validated MAPE across the 13 prediction steps. Identify whether errors grow over time or concentrate in particular targets.
 
-### 1.6 Add or change packages
-**Quick test (temporary):** install a package from a terminal or notebook cell:
+## 3. Key Insights
 
-```bash
-pip install <package-name>
-```
+### 3.1. Reactor operations reveal hidden biological information
 
-These packages are lost when the session shuts down.
+Feed-controller decisions encode information about substrate concentrations. Certain feeding actions are triggered by threshold crossings, providing indirect observations even when actual substrate measurements are unavailable.
 
-**Permanent (for the whole team):** add the package to `environment.yml`, then commit and push. Rebuild the session environment from your launcher, and every **new** session will include it.
+**[Illustration: Substrate trajectory, controller thresholds, and corresponding feed events]**
 
-```yaml
-dependencies:
-  - pandas
-  - <new-conda-package>
-  - pip:
-      - <new-pip-package>
-```
+### 3.2. Operating signals can reveal batch-specific behavior
 
-&nbsp;
+Feed schedule deviations, unusual feeding events, and changes in volume provide useful information beyond initial conditions.
 
-### 1.7 Use AI coding assistants (optional)
-Your session comes with several AI coding assistants. They all run in the terminal:
+In particular, volume changes not explained by the raw feed measurements can act as empirical proxies for process activity, although feed mass-to-volume conversion is not explicitly known.
 
-| Assistant | Command |
-|---|---|
-| GitHub Copilot CLI | `copilot` |
-| Claude Code | `claude` |
-| OpenAI Codex CLI | `codex` |
-| Pi | `pi` |
+**[Illustration: Recorded volume changes versus feed-derived proxy]**
 
-1. Open a **Terminal** in your session.
-2. Run the command for the assistant you want to use, for example:
-   ```bash
-   copilot
-   ```
-3. When prompted, sign in with your own account or API key for that tool. Access and any usage costs go through your own account.
+### 3.3. Time points are related — especially with limited training data
 
-> **Note:** These sign-ins are separate from your Renku login. Sign-ins may not survive a session shutdown, so you might need to sign in again.
+Rather than fitting 13 completely independent regressions, we use temporally regularized models that encourage neighboring prediction steps to share information.
 
-&nbsp;
+This reduces sensitivity to noise while allowing the process dynamics to change over time.
 
-### 1.8 Change your compute resources
-If you need more CPU, or more memory or a GPU:
+**[Illustration: Independent Ridge versus fused Ridge coefficient trajectories]**
 
-1. **Pause** your session (top-left corner). Your files and changes are kept.
-2. From the dropdown on the launcher button, choose **Modify session resources**.
-3. Select a larger resource class and confirm.
-4. **Resume** the session.
+### 3.4. Different targets require different modeling strategies
 
-To change the resources for all future sessions, edit the **Default Resource Class** in your launcher (click the pencil icon). To change them for a single new session, use the dropdown next to **Launch** and choose **Custom launch**.
+Cell densities, substrate, and byproduct respond differently to operating conditions.
 
-See the [Renku documentation](https://docs.renkulab.io/en/latest/docs/users/compute/guides/select-compute-resources-for-session/) for details.
+We therefore combine target-specific feature engineering with suitable regression methods, including robust fused Ridge, gradient boosting, and RBF-SVR.
 
-&nbsp;
+For substrate, we additionally condition predictions on inferred controller constraints.
 
-## 2. Pause or shut down your session
+**[Illustration: Simplified model architecture]**
 
-Sessions keep running when you close your browser. Please free up resources when you finish:
+## 4. Modeling Approach
 
-* **Pause session** (top-left corner): your workspace is kept for two weeks. Sessions also pause automatically after 30 minutes of inactivity.
+Our final approach combines:
 
-![Pause button](https://raw.githubusercontent.com/SwissDataScienceCenter/renku-outreach/refs/heads/main/tutorial/pause_button.jpeg)
+- Initial conditions and engineered feeding/volume features.
+- Temporally regularized and robust regression.
+- Nonlinear regression for complementary predictions.
+- Controller-informed substrate inference.
+- Target-specific model blending.
 
-&nbsp;
+**[Figure 5: Model pipeline diagram]**
 
-* **Shut down session** (top-left corner): only work you have **committed and pushed** to the repository is kept. Everything else is lost.
+## 5. Results
 
-![Shut down button](https://raw.githubusercontent.com/SwissDataScienceCenter/renku-outreach/refs/heads/main/tutorial/shutdown_button.jpeg)
+**[Table: Cross-validation MAPE by target, plus overall MAPE]**
 
-> **Important:** Even paused sessions can end unexpectedly. **Commit and push regularly.**
+**[Figure 6: Actual versus predicted trajectories for selected validation batches]**
 
-&nbsp;
+Briefly discuss model strengths, remaining difficulties, and performance on the hidden test set, if available.
 
-## Need help?
-Ask the SDSC coordinators or the Renku team on site, or write to `hello@renku.io` with the subject *[SDSC STEM4Health] Your topic*.
+## 6. Limitations and Lessons Learned
+
+- Small dataset: only 49 independent labeled batches.
+- Some mechanistic quantities are available only through normalized measurements or empirical proxies.
+- Late-stage metabolite predictions remain challenging.
+- Repeated model selection on the same cross-validation data can lead to optimistic performance estimates.
+
+## 7. How to Run
+
+**[Instructions for environment setup, model execution, cross-validation, and generating submission files]**
+
+## 8. Team and Acknowledgments
+
+**[Team members, hackathon, and relevant references]**
