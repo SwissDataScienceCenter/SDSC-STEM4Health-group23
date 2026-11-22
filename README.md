@@ -107,11 +107,13 @@ Our final approach combines:
 
 ## 5. Results
 
-**[Table: Cross-validation MAPE by target, plus overall MAPE]**
+Our latest (for when updating the Readme!) version achieved:
+vcd mape: 6.535
+tcd mape: 6.439
+substrate mape: 6.512
+byproduct mape: 7.687
+mean mape: 6.793
 
-**[Figure 6: Actual versus predicted trajectories for selected validation batches]**
-
-Briefly discuss model strengths, remaining difficulties, and performance on the hidden test set, if available.
 
 ## 6. Limitations and Lessons Learned
 
