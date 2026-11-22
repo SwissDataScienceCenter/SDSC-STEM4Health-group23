@@ -82,13 +82,16 @@ We also apply robust regression to reduce the influence of unusually large devia
 
 ### 3.4. Different targets require different modeling strategies
 
-Cell densities, substrate, and byproduct respond differently to operating conditions.
+The four target variables exhibit different dynamics and respond differently to reactor operating conditions. 
+Rather than using a single model for all targets, we suggest target-specific prediction strategies, here is a possible strategy-list (used in one of our latest attempts, v14):
 
-We therefore combine target-specific feature engineering with suitable regression methods, including robust fused Ridge, gradient boosting, and RBF-SVR.
+VCD and TCD: Robust fused Ridge regression combined with nonlinear RBF-SVR and gradient boosting.
 
-For substrate, we additionally condition predictions on inferred controller constraints.
+Substrate: Step-wise Ridge regression, supplemented by mass-balance-derived features and probabilistic conditioning on inferred feed-controller thresholds.
 
-**[Illustration: Simplified model architecture]**
+Byproduct: Robust fused Ridge combined with gradient boosting, using additional features derived from feeding patterns and volume changes.
+
+This approach combines physically motivated feature engineering, temporal regularization, and nonlinear regression, while allowing each target to benefit from the information most relevant to its behavior.
 
 ## 4. Modeling Approach
 
