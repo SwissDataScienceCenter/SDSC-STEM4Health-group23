@@ -17,13 +17,13 @@ Our dataset contains 49 labeled training batches and 12 hidden test batches. Mod
 
 ### 2.1. What does a typical behaviour run look like?
 
-Here are the four quantities we need to predict, in the batches we have full information about:
+Here are the four quantities we need to predict - plotting all known batches and the mean trajectory. Note that they are all densities, i.e., quantity per volume:
 
+![mean_trajectories_and_overall_behavious](readme_pics/mean_trajectories_measures.png)
 
+And here are the 4 feeds over time, the color indicated the amount:
 
-Plot the four target quantities over time, together with the feeding schedules and reactor volume.
-
-Observe how cell densities, substrate, and byproduct evolve throughout a run.
+![feeds_over_time](readme_pics/feeds_amount_per_time.png)
 
 ### 2.2. How much do batches differ?
 
