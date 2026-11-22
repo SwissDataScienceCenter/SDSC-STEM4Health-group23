@@ -27,23 +27,17 @@ And here are the 4 feeds over time, the color indicated the amount:
 
 ![feeds_over_time](readme_pics/feeds_amount_per_time.png)
 
-### 2.2. How much do batches differ?
 
-**[Figure 2: Target trajectories across all training batches]**
+### 2.2. Does increasing volume explain declining cell density?
 
-Overlay trajectories from different batches to identify common patterns and batch-to-batch variability.
+![cells_and_dilution](readme_pics/cells_and_dilution.png)
 
-Consider highlighting unusual late-stage behavior.
+Comparing VCD and TCD with their volume-adjusted equivalents (VCD × volume and TCD × volume).
 
-### 2.3. Does increasing volume explain declining cell density?
+The volume steadily increases, which suggests that dilution can explain at least part of the decrease of VCD and TCD. (But does it explain everything?)
 
-**[Figure 3: Cell density versus estimated total cell amount]**
 
-Compare VCD and TCD with their volume-adjusted equivalents (VCD × volume and TCD × volume).
-
-Investigate whether late-stage decreases in cell density reflect dilution, changes in total cell count, or both.
-
-### 2.4. Where are the difficult prediction regions?
+### 2.3. Where are the difficult prediction regions?
 
 **[Figure 4: Prediction error by time step and target]**
 
