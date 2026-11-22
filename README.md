@@ -47,7 +47,15 @@ In this version, errors in Substrate and Byproduct increase over time, while the
 
 ### 3.1. Reactor operations reveal biological information
 
-Feed-controller decisions seems to encode information about substrate concentrations. We suspect that certain feeding actions are triggered by threshold crossings, providing us with indirect observations even when actual substrate measurements are unavailable.
+The substrate feeding schedule appears to encode information about the underlying substrate concentration. By examining the relationship between measured substrate levels and subsequent feeding decisions, we identified two consistent controller rules:
+
+Days 7–9: Substrate feeding is triggered when the concentration falls below approximately 1.95 (112/112 checked decisions consistent).
+
+Days 11–12: A higher feed mass is administered when the concentration falls below approximately 0.965 (78/78 checked decisions consistent).
+
+Feed events consistently follow the corresponding measurements by approximately 0.51–0.56 elapsed-time units.
+
+These observations effectively turn the feeding schedule into an indirect substrate sensor. We incorporate the inferred threshold constraints into our predictions, allowing us to recover information about substrate concentrations even when the measurements themselves are hidden.
 
 **[Illustration: Substrate trajectory, controller thresholds, and corresponding feed events]**
 
@@ -109,5 +117,5 @@ Briefly discuss model strengths, remaining difficulties, and performance on the 
 **[Instructions for environment setup, model execution, cross-validation, and generating submission files]**
 
 ## 8. Team and Acknowledgments
-
-**[Team members, hackathon, and relevant references]**
+Team members:
+Gülce Berfin Ercan, Hümay Zehra Özer, Svetlana Tsizin, Karina Samvelyan.
