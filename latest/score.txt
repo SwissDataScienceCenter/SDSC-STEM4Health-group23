@@ -1,0 +1,5 @@
+vcd mape: 6,534
+tcd mape: 6,439
+substrate mape: 6,737
+byproduct mape: 8,258
+mean mape: 6,992
