@@ -1,4 +1,4 @@
-# Decode the Bioreactor
+# Decode the Bioreactor - STEM4Health Hackathon
 
 Predicting cell growth, substrate concentration, and byproduct formation from initial conditions and bioreactor operating data.
 
