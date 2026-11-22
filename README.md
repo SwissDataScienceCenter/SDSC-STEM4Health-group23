@@ -129,4 +129,4 @@ mean mape: 6.793
 ## 7. The team:
 Gülce Berfin Ercan, Hümay Zehra Özer, Svetlana Tsizin, Karina Samvelyan.
 
-We thank SDSC and johnson & Johnson for this opportunity and for the organization.
+We thank SDSC and Johnson & Johnson for this opportunity and for the organization.
