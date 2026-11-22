@@ -63,11 +63,14 @@ We don't observe substrate concentrations in test batches, but the controller's 
 
 ### 3.2. Operating signals can reveal batch-specific behavior
 
-Feed schedule deviations, unusual feeding events, and changes in volume provide useful information beyond initial conditions.
+Beyond substrate-controller decisions, the reactor's operating records contain additional information about batch behavior.
 
-In particular, volume changes not explained by the raw feed measurements can act as empirical proxies for process activity, although feed mass-to-volume conversion is not explicitly known.
+In particular, we identified an empirical volume–feed residual signal, derived from changes in reactor volume and recorded feeding quantities. During the early stages (steps 1–5), this signal showed a strong association with byproduct accumulation across batches (Pearson (r = 0.71), adjusted for timing and initial volume). The association remained substantial after additionally accounting for volume change ((r = 0.59)).
 
-**[Illustration: Recorded volume changes versus feed-derived proxy]**
+Interestingly, the signal was much less informative about short-term byproduct changes within individual batches. This suggests that it primarily captures batch-to-batch differences in process behavior, rather than instantaneous production rates.
+
+Since feeds are recorded as masses rather than volumes, the residual is treated as an empirical predictor, not a physically exact volume balance.
+
 
 ### 3.3. Time points are related — especially with limited training data
 
