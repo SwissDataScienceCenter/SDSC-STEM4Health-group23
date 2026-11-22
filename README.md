@@ -74,11 +74,11 @@ Since feeds are recorded as masses rather than volumes, the residual is treated 
 
 ### 3.3. Time points are related — especially with limited training data
 
-Rather than fitting 13 completely independent regressions, we use temporally regularized models that encourage neighboring prediction steps to share information.
+With only 49 labeled batches, fitting independent regression models for each prediction step can lead to noisy estimates. Since the underlying biological process evolves continuously, we expect the relationships between inputs and outputs to change gradually over time.
 
-This reduces sensitivity to noise while allowing the process dynamics to change over time.
+We therefore tried fused Ridge regression, allowing each time step to have its own coefficients while encouraging neighboring steps to have similar coefficients. This shares information across time without imposing a fixed trajectory shape.
 
-**[Illustration: Independent Ridge versus fused Ridge coefficient trajectories]**
+We also apply robust regression to reduce the influence of unusually large deviations in a few training batches.
 
 ### 3.4. Different targets require different modeling strategies
 
