@@ -57,7 +57,8 @@ Feed events consistently follow the corresponding measurements by approximately 
 
 These observations effectively turn the feeding schedule into an indirect substrate sensor. We incorporate the inferred threshold constraints into our predictions, allowing us to recover information about substrate concentrations even when the measurements themselves are hidden.
 
-**[Illustration: Substrate trajectory, controller thresholds, and corresponding feed events]**
+![substrate_controller](readme_pics/substrate_controller.png)
+
 
 ### 3.2. Operating signals can reveal batch-specific behavior
 
