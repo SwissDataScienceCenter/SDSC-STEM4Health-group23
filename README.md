@@ -15,9 +15,11 @@ Our dataset contains 49 labeled training batches and 12 hidden test batches. Mod
 
 ## 2. Exploratory Data Analysis
 
-### 2.1. What does a typical bioreactor run look like?
+### 2.1. What does a typical behaviour run look like?
 
-**[Figure 1: Example batch trajectories]**
+Here are the four quantities we need to predict, in the batches we have full information about:
+
+
 
 Plot the four target quantities over time, together with the feeding schedules and reactor volume.
 
