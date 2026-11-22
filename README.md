@@ -97,13 +97,12 @@ This approach combines physically motivated feature engineering, temporal regula
 
 Our final approach combines:
 
-- Initial conditions and engineered feeding/volume features.
-- Temporally regularized and robust regression.
-- Nonlinear regression for complementary predictions.
-- Controller-informed substrate inference.
-- Target-specific model blending.
-
-**[Figure 5: Model pipeline diagram]**
+- **Process-informed features:** Use feeding schedules, volume changes, and mass-balance-derived features to characterize reactor behavior.
+- **Controller-aware substrate prediction:** Infer hidden substrate concentration constraints from feeding decisions, incorporating future feed timing and amounts.
+- **Cell density prediction:** Ensemble of robust, temporally regularized Ridge regression, gradient boosting, and RBF-SVR.
+- **Byproduct prediction:** Model byproduct relative to viable cell density, incorporating cell growth, substrate dynamics, and lagged features.
+- **MAPE-aware optimization:** Apply inverse-target weighting in byproduct gradient boosting to emphasize smaller values.
+- **Target-specific blending:** Combine complementary predictors and adapt byproduct blending across early and later stages.
 
 ## 5. Results
 
@@ -125,5 +124,3 @@ mean mape: 6.793
 ## 7. The team:
 Gülce Berfin Ercan, Hümay Zehra Özer, Svetlana Tsizin, Karina Samvelyan.
 We thank SDSC and johnson & Johnson for this opportunity and for the organization.
-
-## 8. How to Run
