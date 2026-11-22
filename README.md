@@ -107,10 +107,15 @@ Our final approach combines:
 ## 5. Results
 
 Our latest (for when updating the Readme!) version achieved:
+
 vcd mape: 6.535
+
 tcd mape: 6.439
+
 substrate mape: 6.512
+
 byproduct mape: 7.687
+
 mean mape: 6.793
 
 
@@ -123,4 +128,5 @@ mean mape: 6.793
 
 ## 7. The team:
 Gülce Berfin Ercan, Hümay Zehra Özer, Svetlana Tsizin, Karina Samvelyan.
+
 We thank SDSC and johnson & Johnson for this opportunity and for the organization.
