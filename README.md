@@ -39,15 +39,15 @@ The volume steadily increases, which suggests that dilution can explain at least
 
 ### 2.3. Where are the difficult prediction regions?
 
-**[Figure 4: Prediction error by time step and target]**
+![cv_error_heatmap](readme_pics/cv_error_heatmap.png)
 
-Show cross-validated MAPE across the 13 prediction steps. Identify whether errors grow over time or concentrate in particular targets.
+In this version, errors in Substrate and Byproduct increase over time, while the VCD and TCD are more stable.
 
-## 3. Key Insights
+## 3. Insights and Ideas
 
-### 3.1. Reactor operations reveal hidden biological information
+### 3.1. Reactor operations reveal biological information
 
-Feed-controller decisions encode information about substrate concentrations. Certain feeding actions are triggered by threshold crossings, providing indirect observations even when actual substrate measurements are unavailable.
+Feed-controller decisions seems to encode information about substrate concentrations. We suspect that certain feeding actions are triggered by threshold crossings, providing us with indirect observations even when actual substrate measurements are unavailable.
 
 **[Illustration: Substrate trajectory, controller thresholds, and corresponding feed events]**
 
