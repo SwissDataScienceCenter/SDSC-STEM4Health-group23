@@ -122,10 +122,8 @@ mean mape: 6.793
 - Late-stage metabolite predictions remain challenging.
 - Repeated model selection on the same cross-validation data can lead to optimistic performance estimates.
 
-## 7. How to Run
-
-**[Instructions for environment setup, model execution, cross-validation, and generating submission files]**
-
-## 8. Team and Acknowledgments
-Team members:
+## 7. The team:
 Gülce Berfin Ercan, Hümay Zehra Özer, Svetlana Tsizin, Karina Samvelyan.
+We thank SDSC and johnson & Johnson for this opportunity and for the organization.
+
+## 8. How to Run
