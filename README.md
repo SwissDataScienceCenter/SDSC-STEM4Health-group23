@@ -21,6 +21,8 @@ Here are the four quantities we need to predict - plotting all known batches and
 
 ![mean_trajectories_and_overall_behavious](readme_pics/mean_trajectories_measures.png)
 
+Note that the batch variability is relatively small early on and becomes more pronounced later, especially for cell densities. This suggests that differences between batches become more important as the process progresses.
+
 And here are the 4 feeds over time, the color indicated the amount:
 
 ![feeds_over_time](readme_pics/feeds_amount_per_time.png)
